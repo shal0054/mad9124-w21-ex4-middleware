@@ -1,12 +1,14 @@
 'use strict'
 // load dependencies
 const {cars} = require('./cars.js')
+const morgan = require('morgan')
 const express = require('express')
 
 // create the express app
 const app = express()
 
 // configure express middleware
+app.use(morgan('tiny'))
 app.use(express.json())
 
 /**
@@ -57,7 +59,7 @@ app.post('/api/cars', (req, res) => {
         {
           status: '400',
           title: 'schema validation error',
-          detail: `Expected resource type to be 'Car', got '${data?.type}'`,
+          detail: `Expected resource type to be 'cars', got '${data?.type}'`,
           source: {
             pointer: '/data/type'
           }
